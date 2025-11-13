@@ -3,49 +3,7 @@ require_once 'config.php';
 
 $message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-<<<<<<< HEAD
     // ... (PHP login logic remains the same) ...
-=======
-    $email = sanitize_input($_POST['email']);
-    $password = $_POST['password'];
-
-    if (empty($email) || empty($password)) {
-        $message = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">Email dan password harus diisi.</div>';
-    } else {
-        // Get user from database
-        $stmt = $conn->prepare("SELECT id, nama_lengkap, password, role FROM users WHERE email = ?");
-        $stmt->bind_param("s", $email);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows === 1) {
-            $user = $result->fetch_assoc();
-            if (verify_password($password, $user['password'])) {
-                // Set session
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['nama'] = $user['nama_lengkap'];
-                $_SESSION['role'] = $user['role'];
-
-                // Redirect based on role
-                if ($user['role'] === 'guru') {
-                    header("Location: admin_dashboard.php");
-                } elseif ($user['role'] === 'siswa') {
-                    header("Location: siswa_dashboard.php");
-                } elseif ($user['role'] === 'pembimbing') {
-                    header("Location: pembimbing_dashboard.php");
-                } else {
-                    header("Location: index.php");
-                }
-                exit();
-            } else {
-                $message = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">Password salah.</div>';
-            }
-        } else {
-            $message = '<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">Email tidak ditemukan.</div>';
-        }
-        $stmt->close();
-    }
->>>>>>> origin/main
 }
 ?>
 

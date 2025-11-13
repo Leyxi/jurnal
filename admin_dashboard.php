@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 session_start();
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");
@@ -15,13 +14,6 @@ header("X-XSS-Protection: 1; mode=block");
 
 require_once 'config.php';
 $page = $_GET['page'] ?? 'dashboard';
-=======
-require_once 'config.php';
-redirect_if_not_logged_in();
-redirect_if_not_role('guru');
-
-$nama = $_SESSION['nama'];
->>>>>>> origin/main
 ?>
 
 <!DOCTYPE html>
