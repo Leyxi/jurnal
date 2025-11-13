@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 session_start();
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");
@@ -14,6 +15,13 @@ header("X-XSS-Protection: 1; mode=block");
 
 require_once 'config.php';
 $page = $_GET['page'] ?? 'dashboard';
+=======
+require_once 'config.php';
+redirect_if_not_logged_in();
+redirect_if_not_role('guru');
+
+$nama = $_SESSION['nama'];
+>>>>>>> origin/main
 ?>
 
 <!DOCTYPE html>
@@ -111,5 +119,54 @@ $page = $_GET['page'] ?? 'dashboard';
             </main>
         </div>
     </div>
+<<<<<<< HEAD
+=======
+
+    <script>
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('modal-active');
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('modal-active');
+            }
+        }
+
+        function openEditModal(type, id, nama, email) {
+            document.getElementById(`edit-${type}-id`).value = id;
+            document.getElementById(`edit-${type}-nama`).value = nama;
+            document.getElementById(`edit-${type}-email`).value = email;
+            openModal(`edit${type.charAt(0).toUpperCase() + type.slice(1)}Modal`);
+        }
+
+        function openDeleteModal(type, id) {
+            document.getElementById(`delete-${type}-id`).value = id;
+            openModal(`delete${type.charAt(0).toUpperCase() + type.slice(1)}Modal`);
+        }
+
+        function openJurnalModal(id, komentar, status) {
+            document.getElementById('jurnal-id').value = id;
+            document.getElementById('komentar').value = komentar;
+            document.getElementById('status').value = status;
+            openModal('jurnalModal');
+        }
+
+        // Close modals on escape key press
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.modal-active').forEach(modal => {
+                    closeModal(modal.id);
+                });
+            }
+        });
+    </script>
+>>>>>>> origin/main
 </body>
 </html>
