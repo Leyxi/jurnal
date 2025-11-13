@@ -1,20 +1,9 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php");
-    exit();
-}
-
-// Regenerate session ID to prevent session fixation
-session_regenerate_id(true);
-
-// Set security headers
-header("Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.tailwindcss.com; style-src 'self' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; ");
-header("X-Content-Type-Options: nosniff");
-header("X-Frame-Options: DENY");
-header("X-XSS-Protection: 1; mode=block");
-
 require_once 'config.php';
+redirect_if_not_logged_in();
+redirect_if_not_role('guru');
+
+$nama = $_SESSION['nama'];
 ?>
 
 <!DOCTYPE html>
@@ -114,7 +103,7 @@ require_once 'config.php';
             document.getElementById(`delete-${type}-id`).value = id;
             openModal(`delete${type.charAt(0).toUpperCase() + type.slice(1)}Modal`);
         }
-        
+
         function openJurnalModal(id, komentar, status) {
             document.getElementById('jurnal-id').value = id;
             document.getElementById('komentar').value = komentar;
